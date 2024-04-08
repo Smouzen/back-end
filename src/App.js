@@ -1,25 +1,14 @@
-import logo from './logo.svg';
-import './App.css';
+import { MongoClient } from "mongodb";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+const password = encodeURIComponent(process.env.MONGO_PASSWORD.trim());
+const connectionString = `mongodb+srv://lsmous27:<password>@devcluster.wl59cem.mongodb.net/?retryWrites=true&w=majority&appName=DevCluster`; // clustore url
+const client = new MongoClient(connectionString);
+let conn;
+try {
+  conn = await client.connect();
+  console.log("connection successful")
+} catch(e) {
+  console.error(e);
 }
-
-export default App;
+let db = conn.db("integration_ninjas");
+export default db;
