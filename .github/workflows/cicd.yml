@@ -3,7 +3,7 @@ name: Deploy Node Applicaiton
 on:
     push:
         branches:
-            - mern-ec2-docker
+            - main
 
 jobs:
   build:
